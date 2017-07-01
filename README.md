@@ -1,0 +1,49 @@
+# cassandra
+cheat note on Installing Casandra On Windows 10:
+
+
+Prerequisites :
+
+1) Install Python, Add python binaries to PATH environment variable  (have installed Python 2.7 version in my local)
+C:\Python27;C:\Python27\Scripts;
+
+2) Install Microsoft Visual C++ Compiler for Python from msdn site
+
+Python Version   You will need
+3.5 and later    Visual C++ Build Tools 2015 or Visual Studio 2015
+3.3 and 3.4      Windows SDK for Windows 7 and .NET 4.0(Alternatively, Visual Studio 2010 if you have access to it)
+2.6 to 3.2 		 Microsoft Visual C++ Compiler for Python 2.7
+
+3) Edit C:\Python27\Lib\distutils\msvc9compiler.py  
+add the below  line after(line 266) 
+
+def query_vcvarsall(version, arch="x86"):
+    """Launch vcvarsall.bat and read the settings from its environment
+    """
+    vcvarsall = find_vcvarsall(version) 
+
+ vcvarsall = "C:/Users/kuchi/AppData/Local/Programs/Common/Microsoft/Visual C++ for Python/9.0" + "/vcvarsall.bat"
+
+ 4) After installing the compiler tools and above setup, you should ensure that your version of setuptools is up-to-date.
+ https://pypi.python.org/pypi/setuptools
+ download ez_setup.py and run the following command from cli
+
+ cmd> python ez_setup.py
+===================================================================
+--
+--
+Installed c:\python27\lib\site-packages\setuptools-32.1.0-py2.7.egg
+Processing dependencies for setuptools==32.1.0
+Finished processing dependencies for setuptools==32.1.0
+====================================================================
+
+ 5)set DISTUTILS_USE_SDK=1
+ 6)SET MSSdk=1
+ 7)pip install Cython
+ 8)pip install wheel
+ 9)install casandra -- download appropriate version 32 or 64 based on OS
+ 10)cassandra\apache-cassandra-3.9\pylib> python setup.py install
+ 11)cassandra\apache-cassandra-3.9\bin> cassandra.bat
+ 12)open another terminal 
+ cassandra\apache-cassandra-3.9\bin> cqlsh.bat
+ cqlsh>
